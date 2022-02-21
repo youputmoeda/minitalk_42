@@ -6,7 +6,7 @@
 /*   By: joteixei <joteixei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 00:26:59 by joteixei          #+#    #+#             */
-/*   Updated: 2022/02/21 10:36:33 by joteixei         ###   ########.fr       */
+/*   Updated: 2022/02/21 12:54:53 by joteixei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	signal_handler(int sig)
 	}
 	if (sig == SIGUSR2)
 	{
-		ft_putstr_fd("-> Message recieved \n", 1);
+		ft_putstr_fd("-> Message received \n", 1);
 		flag = 1;
-		exit(EXIT_SUCCESS);
+		exit(EXIT_FAILURE);
 	}
 }
 

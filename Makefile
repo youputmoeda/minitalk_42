@@ -1,7 +1,7 @@
 # ------------------------------ Sources ------------------------------
 ###### Files #####
-CLIENT = sandbox_client
-SERVER = sandbox_server
+CLIENT = client
+SERVER = server
 LIBFT = cd libft && make
 LIB = libft/libft.a
 
@@ -10,8 +10,8 @@ SRC_client = $(CLIENT)
 SRC_server = $(SERVER)
 
 ###### NAME #######
-client_name = client
-server_name = server
+client_name = sandbox_client.c
+server_name = sandbox_server.c
 NAME = server client
 
 ###### RULES ######
@@ -45,18 +45,22 @@ all: comp_start $(NAME)
 
 comp_start:
 	@$(COMP_START)
-	@make -C libft
-	
-$(client_name) :
-	$(CC) $(CFLAGS) sandbox_client.c libft/libft.a -o $(client_name)
+	make -C libft
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(CLIENT) : sandbox_client.o
+	$(CC) $(CFLAGS) sandbox_client.o libft/libft.a -o $(CLIENT)
 	@$(CLI_READY)
 
-$(server_name) : 
-	$(CC) $(CFLAGS) sandbox_server.c libft/libft.a -o $(server_name)
+$(SERVER) : sandbox_server.o
+	$(CC) $(CFLAGS) sandbox_server.o libft/libft.a -o $(SERVER)
 	@$(SERV_READY)
 
 clean:
-	make clean -C ./libft
+	$(RM)	sandbox_client.o sandbox_server.o
+	@make clean -C ./libft
 
 fclean: clean
 	$(RM)	$(LIB)
